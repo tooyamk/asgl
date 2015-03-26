@@ -50,33 +50,33 @@ package asgl.materials {
 			return _shader;
 		}
 		public function set shader(value:Shader3D):void {
-			if (_shader != null) {
-				_shader.removeEventListener(ASGLEvent.UPLOAD, _uploadShaderHandler);
-				_shader.removeEventListener(ASGLEvent.DISPOSE, _disposeShaderHandelr);
-				_shader.removeEventListener(ASGLEvent.DISPOSE_SHADER_PROGRAM, _disposeShaderProgramHandler);
-				
-				_shaderCell = null;
-				
-				if (_shaderProgram != null) {
-					_shaderProgram = null;
+			if (_shader != value) {
+				if (_shader != null) {
+					_shader.removeEventListener(ASGLEvent.UPLOAD, _uploadShaderHandler);
+					_shader.removeEventListener(ASGLEvent.DISPOSE, _disposeShaderHandelr);
+					_shader.removeEventListener(ASGLEvent.DISPOSE_SHADER_PROGRAM, _disposeShaderProgramHandler);
 					
-					if (hasEventListener(ASGLEvent.UPDATE_SHADER_PROGRAM)) dispatchEvent(new ASGLEvent(ASGLEvent.UPDATE_SHADER_PROGRAM));
+					_shaderCell = null;
+					
+					if (_shaderProgram != null) {
+						_shaderProgram = null;
+						
+						if (hasEventListener(ASGLEvent.UPDATE_SHADER_PROGRAM)) dispatchEvent(new ASGLEvent(ASGLEvent.UPDATE_SHADER_PROGRAM));
+					}
 				}
+				
+				_shader = value;
+				
+				if (_shader != null) {
+					_shader.addEventListener(ASGLEvent.UPLOAD, _uploadShaderHandler, false, 0, true);
+					_shader.addEventListener(ASGLEvent.DISPOSE, _disposeShaderHandelr, false, 0, true);
+					_shader.addEventListener(ASGLEvent.DISPOSE_SHADER_PROGRAM, _disposeShaderProgramHandler, false, 0, true);
+				}
+				
+				_uploadShaderHandler(null);
 			}
-			
-			_shader = value;
-			
-			if (_shader != null) {
-				_shader.addEventListener(ASGLEvent.UPLOAD, _uploadShaderHandler, false, 0, true);
-				_shader.addEventListener(ASGLEvent.DISPOSE, _disposeShaderHandelr, false, 0, true);
-				_shader.addEventListener(ASGLEvent.DISPOSE_SHADER_PROGRAM, _disposeShaderProgramHandler, false, 0, true);
-			}
-			
-			_uploadShaderHandler(null);
 		}
 		public function get shaderProgram():ProgramData {
-			updateShaderProgram();
-			
 			return _shaderProgram;
 		}
 		public function clearAll():void {

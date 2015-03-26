@@ -19,6 +19,7 @@ package asgl.renderables {
 	public class QuadRenderable extends BaseRenderable {
 		asgl_protected var _vertices:Vector.<Number>;
 		asgl_protected var _texCoords:Vector.<Number>;
+		asgl_protected var _colors:Vector.<Number>;
 		
 		public function QuadRenderable() {
 			_meshAsset = new MeshAsset();
@@ -30,6 +31,17 @@ package asgl.renderables {
 			vertexElement.values = _vertices;
 			_meshAsset.elements[MeshElementType.VERTEX] = vertexElement;
 			
+			_blendFactors = BlendFactorsData.ALPHA_BLEND;
+		}
+		public function createColorElement():void {
+			var colorElement:MeshElement = new MeshElement();
+			colorElement.numDataPreElement = 4;
+			colorElement.valueMappingType = MeshElementValueMappingType.TRIANGLE_INDEX;
+			_colors = new Vector.<Number>(16);
+			colorElement.values = _colors;
+			_meshAsset.elements[MeshElementType.COLOR0] = colorElement;
+		}
+		public function createTexCoordElement():void {
 			var texCoordElement:MeshElement = new MeshElement();
 			texCoordElement.numDataPreElement = 2;
 			texCoordElement.valueMappingType = MeshElementValueMappingType.TRIANGLE_INDEX;
@@ -43,8 +55,35 @@ package asgl.renderables {
 			_texCoords[5] = 1;
 			
 			_texCoords[7] = 1;
+		}
+		public function setColor(vertexIndex:uint, r:Number, g:Number, b:Number, a:Number):void {
+			var index:int = vertexIndex * 4;
 			
-			_blendFactors = BlendFactorsData.ALPHA_BLEND;
+			_colors[index++] = r;
+			_colors[index++] = g;
+			_colors[index++] = b;
+			_colors[index] = a;
+		}
+		public function setColors(r:Number, g:Number, b:Number, a:Number):void {
+			_colors[0] = r;
+			_colors[1] = g;
+			_colors[2] = b;
+			_colors[3] = a;
+			
+			_colors[4] = r;
+			_colors[5] = g;
+			_colors[6] = b;
+			_colors[7] = a;
+			
+			_colors[8] = r;
+			_colors[9] = g;
+			_colors[10] = b;
+			_colors[11] = a;
+			
+			_colors[12] = r;
+			_colors[13] = g;
+			_colors[14] = b;
+			_colors[15] = a;
 		}
 		public function setQuadTexCoords(leftTopU:Number, leftTopV:Number, rightTopU:Number, rightTopV:Number,
 										 rightBottomU:Number, rightBottomV:Number, leftBottomU:Number, leftBottomV:Number):void {

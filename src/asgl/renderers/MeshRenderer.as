@@ -105,7 +105,11 @@ package asgl.renderers {
 				renderable.postRender(device, camera);
 			} else {
 				var sd:StaticData = new StaticData();
+				sd.renderable = renderable;
 				sd.renderer = this;
+				sd.device = device;
+				sd.camera = camera;
+				sd.material = material;
 				
 				_staticMap[sd.renderID] = sd;
 				staticRenderData[staticRenderData.length] = sd;

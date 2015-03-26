@@ -22,6 +22,7 @@ package asgl.renderables {
 		
 		asgl_protected var _vertices:Vector.<Number>;
 		asgl_protected var _texCoords:Vector.<Number>;
+		asgl_protected var _colors:Vector.<Number>;
 		
 		public function QuadArrayRenderable() {
 			_numQuads = 0;
@@ -35,13 +36,6 @@ package asgl.renderables {
 			vertexElement.values = _vertices;
 			_meshAsset.elements[MeshElementType.VERTEX] = vertexElement;
 			
-			var texCoordElement:MeshElement = new MeshElement();
-			texCoordElement.numDataPreElement = 2;
-			texCoordElement.valueMappingType = MeshElementValueMappingType.TRIANGLE_INDEX;
-			_texCoords = new Vector.<Number>();
-			texCoordElement.values = _texCoords;
-			_meshAsset.elements[MeshElementType.TEXCOORD] = texCoordElement;
-			
 			_blendFactors = BlendFactorsData.ALPHA_BLEND;
 		}
 		public function get numQuads():uint {
@@ -51,7 +45,44 @@ package asgl.renderables {
 			_numQuads = value;
 			
 			_vertices.length = value * 12;
-			_texCoords.length = value * 8;
+			if (_texCoords != null) _texCoords.length = value * 8;
+			if (_colors != null) _colors.length = value * 16;
+		}
+		public function createColorElement():void {
+			var colorElement:MeshElement = new MeshElement();
+			colorElement.numDataPreElement = 4;
+			colorElement.valueMappingType = MeshElementValueMappingType.TRIANGLE_INDEX;
+			_colors = new Vector.<Number>();
+			colorElement.values = _colors;
+			_meshAsset.elements[MeshElementType.COLOR0] = colorElement;
+		}
+		public function createTexCoordElement():void {
+			var texCoordElement:MeshElement = new MeshElement();
+			texCoordElement.numDataPreElement = 2;
+			texCoordElement.valueMappingType = MeshElementValueMappingType.TRIANGLE_INDEX;
+			_texCoords = new Vector.<Number>();
+			texCoordElement.values = _texCoords;
+			_meshAsset.elements[MeshElementType.TEXCOORD] = texCoordElement;
+		}
+		public function setColor(quadIndex:uint, vertexIndex:uint, r:Number, g:Number, b:Number, a:Number):void {
+			if (quadIndex < _numQuads && vertexIndex < 4) {
+				var index:int = quadIndex * 16 + vertexIndex * 4;
+				
+				_vertices[index++] = r;
+				_vertices[index++] = g;
+				_vertices[index++] = b;
+				_vertices[index] = a;
+			}
+		}
+		public function setColors(r:Number, g:Number, b:Number, a:Number):void {
+			for (var i:int = 0; i < _numQuads; i++) {
+				var index:int = i * 16;
+				
+				_vertices[index++] = r;
+				_vertices[index++] = g;
+				_vertices[index++] = b;
+				_vertices[index] = a;
+			}
 		}
 		public function setQuadTexCoords(quadIndex:uint, leftTopU:Number, leftTopV:Number, rightTopU:Number, rightTopV:Number,
 										 rightBottomU:Number, rightBottomV:Number, leftBottomU:Number, leftBottomV:Number):void {
