@@ -129,11 +129,13 @@ package asgl.renderables {
 			return _meshBuffer;
 		}
 		public function set meshBuffer(value:MeshBuffer):void {
-			if (_meshBuffer != null) _meshBuffer.removeEventListener(ASGLEvent.DISPOSE, _disposeMeshBufferHandler);
-			
-			_meshBuffer = value;
-			
-			if (_meshBuffer != null) _meshBuffer.addEventListener(ASGLEvent.DISPOSE, _disposeMeshBufferHandler, false, 0, true);
+			if (_meshBuffer != value) {
+				if (_meshBuffer != null) _meshBuffer.removeEventListener(ASGLEvent.DISPOSE, _disposeMeshBufferHandler);
+				
+				_meshBuffer = value;
+				
+				if (_meshBuffer != null) _meshBuffer.addEventListener(ASGLEvent.DISPOSE, _disposeMeshBufferHandler, false, 0, true);
+			}
 		}
 		public function get object3D():Object3D {
 			return _object3D;
