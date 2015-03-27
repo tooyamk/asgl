@@ -111,7 +111,7 @@ package asgl.geometries.primitives {
 			
 			mo = SimplePlane.create(width, height, widthSegs, heightSegs, generateTexCoords);
 			coord.identity(false);
-			coord.appendLocalRotation(Float4.createEulerXYZQuaternion(-Math.PI * 0.5, 0, Math.PI * 0.5), false);
+			coord.appendLocalRotation(Float4.createEulerXYZQuaternion(-Math.PI * 0.5, Math.PI * 0.5), false);
 			coord.appendLocalTranslate(0, halfLength, 0, false);
 			m = coord.getWorldMatrix(m);
 			vertices = mo.elements[MeshElementType.VERTEX];
@@ -136,7 +136,7 @@ package asgl.geometries.primitives {
 			
 			mo = SimplePlane.create(width, height, widthSegs, heightSegs, generateTexCoords);
 			coord.identity(false);
-			coord.appendLocalRotation(Float4.createEulerXYZQuaternion(-Math.PI * 0.5, 0, -Math.PI * 0.5), false);
+			coord.appendLocalRotation(Float4.createEulerXYZQuaternion(-Math.PI * 0.5, -Math.PI * 0.5), false);
 			coord.appendLocalTranslate(0, halfLength, 0, false);
 			m = coord.getWorldMatrix(m);
 			vertices = mo.elements[MeshElementType.VERTEX];

@@ -150,7 +150,7 @@ package asgl.renderables {
 			_priority = value;
 			if (_priority > MAX_PRIORITY) throw new Error();
 			
-			_highRenderSortValue = (_highRenderSortValue & 0x1F0000) | value;
+			_highRenderSortValue = (_highRenderSortValue & 0x1F0000) | _priority;
 			_renderSortValue = _highRenderSortValue * NumberLong.HIGH_CONST + _lowRenderSortValue;
 		}
 		public function get queue():uint {
