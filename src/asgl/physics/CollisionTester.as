@@ -106,6 +106,9 @@ package asgl.physics {
 			return Sphere_OBB(sphere, obj2, box, obj1);
 		}
 		private static function Sphere_OBB(sphere:BoundingSphere, obj1:Object3D, box:BoundingOrientedBox, obj2:Object3D):Boolean {
+			var aabb:BoundingAxisAlignedBox = box.aabb;
+			if (aabb == null) return false;
+			
 			var m:Matrix4x4 = Coordinates3DHelper.getLocalToLocalMatrix(obj1, obj2, _tempMatrix);
 			
 			var o:Float3 = m.transform3x4Float3(sphere.origin, _tempFloat3_1);
@@ -117,7 +120,7 @@ package asgl.physics {
 			if (radius < s) radius = s;
 			radius *= sphere._radius;
 			
-			return _Sphere_AABB(o, radius, box.minX, box.maxX, box.minY, box.maxY, box.minZ, box.maxZ);
+			return _Sphere_AABB(o, radius, aabb.minX, aabb.maxX, aabb.minY, aabb.maxY, aabb.minZ, aabb.maxZ);
 		}
 		private static function AABB_AABB(box1:BoundingAxisAlignedBox, obj1:Object3D, box2:BoundingAxisAlignedBox, obj2:Object3D):Boolean {
 			if (box1.globalMinX > box2.globalMaxX || box1.globalMaxX < box2.globalMinX || 
@@ -129,6 +132,8 @@ package asgl.physics {
 			return AABB_OBB(box2, obj2, box1, obj1);
 		}
 		private static function AABB_OBB(box1:BoundingAxisAlignedBox, obj1:Object3D, box2:BoundingOrientedBox, obj2:Object3D):Boolean {
+			if (box2.aabb == null) return false;
+			
 			_tempVertices[0] = box1.globalMinX;
 			_tempVertices[1] = box1.globalMinY;
 			_tempVertices[2] = box1.globalMinZ;
@@ -189,6 +194,8 @@ package asgl.physics {
 			return true;
 		}
 		private static function OBB_OBB(box1:BoundingOrientedBox, obj1:Object3D, box2:BoundingOrientedBox, obj2:Object3D):Boolean {
+			if (box1.aabb == null || box2.aabb == null) return false;
+			
 			return _OBB_OBB(box1.globalVertices, box2.globalVertices);
 		}
 		private static function _getEdgeDir(vertices:Vector.<Number>, indexID:int, op:Float3):Float3 {
