@@ -7,10 +7,9 @@ package asgl.system {
 	use namespace asgl_protected;
 	
 	public class TextureManager {
-		public static const SAMPLER_MAX:int = 8;
-		
 		asgl_protected var _textureMap:Object;
 		
+		private var _samplerMax:int;
 		private var _device:Device3D;
 		private var _statusMap:Vector.<TextureInfo>;
 		private var _occupiedStatus:Vector.<TextureInfo>;
@@ -19,13 +18,15 @@ package asgl.system {
 		public function TextureManager(device:Device3D) {
 			_device = device;
 			
+			_samplerMax = _device._profile._agalConfiguration.fs._maxNum;
+			
 			_textureMap = {};
-			_statusMap = new Vector.<TextureInfo>(SAMPLER_MAX);
-			for (var i:int = 0; i < SAMPLER_MAX; i++) {
+			_statusMap = new Vector.<TextureInfo>(_samplerMax);
+			for (var i:int = 0; i < _samplerMax; i++) {
 				_statusMap[i] = new TextureInfo(i);
 			}
 			
-			_occupiedStatus = new Vector.<TextureInfo>(SAMPLER_MAX);
+			_occupiedStatus = new Vector.<TextureInfo>(_samplerMax);
 			_numOccupied = 0;
 		}
 		public function createCubeTextureData(size:int, format:String, optimizeForRenderToTexture:Boolean, streamingLevels:int=0):CubeTextureData {
@@ -143,7 +144,7 @@ package asgl.system {
 			}
 		}
 		public function setTextureAt(sampler:int, texture:TextureBase):Boolean {
-			if (sampler >= SAMPLER_MAX) return false;
+			if (sampler >= _samplerMax) return false;
 			
 			if (texture == null) {
 				if (_device._context3D != null) {
@@ -162,7 +163,7 @@ package asgl.system {
 			return true;
 		}
 		public function setTextureFromData(data:AbstractTextureData, sampler:int):Boolean {
-			if (sampler >= SAMPLER_MAX) return false;
+			if (sampler >= _samplerMax) return false;
 			
 			var info:TextureInfo = _statusMap[sampler];
 			
@@ -255,7 +256,7 @@ package asgl.system {
 		}
 		asgl_protected function _recovery():void {
 			var info:TextureInfo;
-			for (var i:int = 0; i < SAMPLER_MAX; i++) {
+			for (var i:int = 0; i < _samplerMax; i++) {
 				info = _statusMap[i];
 				info.samplerStateValue = 0xFFFFFFFF;
 			}

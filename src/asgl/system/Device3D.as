@@ -119,12 +119,6 @@ package asgl.system {
 			_profile = new Device3DProfile();
 			
 			_debugger = new DeviceDebugger();
-			
-			_vertexBufferManager = new VertexBufferManager(this);
-			_textureManager = new TextureManager(this);
-			_indexBufferManager = new IndexBufferManager(this);
-			_programConstantsManager = new ProgramConstantsManager(this);
-			_programManager = new ProgramManager(this);
 		}
 		public function get backBufferHeight():uint {
 			return _backBufferHeight;
@@ -382,7 +376,7 @@ package asgl.system {
 				}
 			}
 		}
-		public function requestContext3DMatchingProfiles(profiles:Vector.<String>):void {
+		public function requestCreateMatchingProfiles(profiles:Vector.<String>):void {
 			if (_stage != null && _isFirstRequest) {
 				var context:Context3D = _stage.context3D;
 				if (context == null) {
@@ -725,7 +719,12 @@ package asgl.system {
 		//handlers
 		private function _context3DCreatedHandler(e:Event):void {
 			_profile.setProfile(_stage.context3D.profile);
-			_programConstantsManager.setProfile();
+			
+			_vertexBufferManager = new VertexBufferManager(this);
+			_textureManager = new TextureManager(this);
+			_indexBufferManager = new IndexBufferManager(this);
+			_programConstantsManager = new ProgramConstantsManager(this);
+			_programManager = new ProgramManager(this);
 			
 			_reset(_stage.context3D);
 		}

@@ -8,8 +8,7 @@ package asgl.system {
 	use namespace asgl_protected;
 	
 	public class VertexBufferManager {
-		public static const VERTEX_BUFFER_MAX:int = 8;
-		
+		private var _vertexBufferMax:int;
 		private var _device:Device3D;
 		private var _bufferMap:Object;
 		private var _statusMap:Vector.<BufferInfo>;
@@ -19,13 +18,15 @@ package asgl.system {
 		public function VertexBufferManager(device:Device3D) {
 			_device = device;
 			
+			_vertexBufferMax = _device._profile._agalConfiguration.va._maxNum;
+			
 			_bufferMap = {};
-			_statusMap = new Vector.<BufferInfo>(VERTEX_BUFFER_MAX);
-			for (var i:int = 0; i < VERTEX_BUFFER_MAX; i++) {
+			_statusMap = new Vector.<BufferInfo>(_vertexBufferMax);
+			for (var i:int = 0; i < _vertexBufferMax; i++) {
 				_statusMap[i] = new BufferInfo(i);
 			}
 			
-			_occupiedStatus = new Vector.<BufferInfo>(VERTEX_BUFFER_MAX);
+			_occupiedStatus = new Vector.<BufferInfo>(_vertexBufferMax);
 			_numOccupied = 0;
 		}
 		public function createVertexBufferData(numVertices:int, data32PerVertex:int, bufferUsage:String=Context3DBufferUsage.STATIC_DRAW):VertexBufferData {
@@ -119,7 +120,7 @@ package asgl.system {
 			}
 		}
 		public function setVertexBufferAt(index:int, buffer:VertexBuffer3D, bufferOffset:int=0, format:String=Context3DVertexBufferFormat.FLOAT_4):Boolean {
-			if (index >= VERTEX_BUFFER_MAX) return false;
+			if (index >= _vertexBufferMax) return false;
 			
 			if (buffer == null) {
 				if (_device._context3D != null) {
@@ -138,7 +139,7 @@ package asgl.system {
 			return true;
 		}
 		public function setVertexBufferFromData(data:VertexBufferData, index:int, bufferOffset:int=0, format:String=Context3DVertexBufferFormat.FLOAT_4):Boolean {
-			if (index >= VERTEX_BUFFER_MAX) return false;
+			if (index >= _vertexBufferMax) return false;
 			
 			var info:BufferInfo = _statusMap[index];
 			

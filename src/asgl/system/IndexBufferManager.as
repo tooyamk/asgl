@@ -6,8 +6,6 @@ package asgl.system {
 	use namespace asgl_protected;
 	
 	public class IndexBufferManager {
-		public static const VERTEX_BUFFER_MAX:int = 8;
-		
 		private var _device:Device3D;
 		private var _indexBufferMap:Object;
 		public function IndexBufferManager(device:Device3D) {

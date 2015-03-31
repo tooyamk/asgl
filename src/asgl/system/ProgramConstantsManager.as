@@ -26,20 +26,14 @@ package asgl.system {
 		public function ProgramConstantsManager(device:Device3D) {
 			_device = device;
 			
-			_vertexConstants = new Vector.<Number>();
-			_fragmentConstants = new Vector.<Number>();
-			_vertexConstantsMap = new Vector.<Number>();
-			_fragmentConstantsMap = new Vector.<Number>();
-		}
-		asgl_protected function setProfile():void {
 			var agalConf:AGALConfiguration = _device._profile._agalConfiguration;
 			_vertexConstantsMax = agalConf.vc._maxNum;
 			_fragmentConstantsMax = agalConf.fc._maxNum;
 			
-			_vertexConstants.length = _vertexConstantsMax;
-			_fragmentConstants.length = _fragmentConstantsMax;
-			_vertexConstantsMap.length = _vertexConstantsMax;
-			_fragmentConstantsMap.length = _fragmentConstantsMax;
+			_vertexConstants = new Vector.<Number>(_vertexConstantsMax);
+			_fragmentConstants = new Vector.<Number>(_fragmentConstantsMax);
+			_vertexConstantsMap = new Vector.<Number>(_vertexConstantsMax);
+			_fragmentConstantsMap = new Vector.<Number>(_fragmentConstantsMax);
 		}
 		public function setProgramConstantsFromByteArray(programType:String, firstRegister:uint, numRegisters:int, data:ByteArray, byteArrayOffset:uint):int {
 			if (data == null) return -1;

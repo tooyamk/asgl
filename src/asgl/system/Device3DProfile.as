@@ -7,6 +7,16 @@ package asgl.system {
 	use namespace asgl_protected;
 
 	public class Device3DProfile {
+		public static const ALL_BASELINE_PROFILES:Vector.<String> = Vector.<String>([Context3DProfile.BASELINE_CONSTRAINED,
+			Context3DProfile.BASELINE,
+			Context3DProfile.BASELINE_EXTENDED]);
+		
+		public static const ALL_STANDARD_PROFILES:Vector.<String> = Vector.<String>([Context3DProfile.STANDARD_CONSTRAINED,
+			Context3DProfile.STANDARD,
+			Context3DProfile.STANDARD_EXTENDED]);
+		
+		public static const ALL_PROFILES:Vector.<String> = ALL_BASELINE_PROFILES.concat(ALL_STANDARD_PROFILES);
+		
 		asgl_protected var _profile:String;
 		asgl_protected var _agalConfiguration:AGALConfiguration;
 		
@@ -15,7 +25,7 @@ package asgl.system {
 		public function get agalConfiguration():AGALConfiguration {
 			return _agalConfiguration;
 		}
-		public function get profile():String {
+		public function get value():String {
 			return _profile;
 		}
 		asgl_protected function setProfile(value:String):void {
