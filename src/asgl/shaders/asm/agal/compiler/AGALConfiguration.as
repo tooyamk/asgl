@@ -50,16 +50,16 @@ package asgl.shaders.asm.agal.compiler {
 			}
 			
 			_registerMap = {};
-			_registerMap[AGALRegisterType.VA_ID] = _va;
-			_registerMap[AGALRegisterType.VC_ID] = _vc;
-			_registerMap[AGALRegisterType.VT_ID] = _vt;
-			_registerMap[AGALRegisterType.VO_ID] = _vo;
-			_registerMap[AGALRegisterType.V_ID]  = _v;
-			_registerMap[AGALRegisterType.FC_ID] = _fc;
-			_registerMap[AGALRegisterType.FT_ID] = _ft;
-			_registerMap[AGALRegisterType.FO_ID] = _fo;
-			_registerMap[AGALRegisterType.FS_ID] = _fs;
-			_registerMap[AGALRegisterType.FD_ID] = _fd;
+			_registerMap[AGALRegisterType.VA] = _va;
+			_registerMap[AGALRegisterType.VC] = _vc;
+			_registerMap[AGALRegisterType.VT] = _vt;
+			_registerMap[AGALRegisterType.VO] = _vo;
+			_registerMap[AGALRegisterType.V]  = _v;
+			_registerMap[AGALRegisterType.FC] = _fc;
+			_registerMap[AGALRegisterType.FT] = _ft;
+			_registerMap[AGALRegisterType.FO] = _fo;
+			_registerMap[AGALRegisterType.FS] = _fs;
+			_registerMap[AGALRegisterType.FD] = _fd;
 		}
 		private static function _createNumMap():Object {
 			var map:Object = {};
@@ -89,13 +89,16 @@ package asgl.shaders.asm.agal.compiler {
 			if (obj == null) {
 				return 0;
 			} else {
-				for (var i:int = 1; i <= 2; i++) {
-					if (index < obj[i]) {
-						return i;
+				var min:int = int.MAX_VALUE;
+				for (var version:int in obj) {
+					if (index < obj[version]) {
+						if (min > version) {
+							min = version;
+						}
 					}
 				}
 				
-				return 0;
+				return min == int.MAX_VALUE ? 0 : min;
 			}
 		}
 		public static function getLowestVersionWithTokens(num:uint):int {
@@ -147,8 +150,8 @@ package asgl.shaders.asm.agal.compiler {
 		public function get fd():AGALRegister {
 			return _fd;
 		}
-		public function getRegsiterFromID(id:int):AGALRegister {
-			return _registerMap[id];
+		public function getRegsiter(type:int):AGALRegister {
+			return _registerMap[type];
 		}
 	}
 }

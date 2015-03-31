@@ -4,6 +4,7 @@ package asgl.system {
 	
 	import asgl.asgl_protected;
 	import asgl.math.Matrix4x4;
+	import asgl.shaders.asm.agal.compiler.AGALConfiguration;
 	
 	use namespace asgl_protected;
 	
@@ -29,12 +30,11 @@ package asgl.system {
 			_fragmentConstants = new Vector.<Number>();
 			_vertexConstantsMap = new Vector.<Number>();
 			_fragmentConstantsMap = new Vector.<Number>();
-			
-			setProfile();
 		}
 		asgl_protected function setProfile():void {
-			_vertexConstantsMax = _device._profile._vertexConstantsMax;
-			_fragmentConstantsMax = _device._profile._fragmentConstantsMax;
+			var agalConf:AGALConfiguration = _device._profile._agalConfiguration;
+			_vertexConstantsMax = agalConf.vc._maxNum;
+			_fragmentConstantsMax = agalConf.fc._maxNum;
 			
 			_vertexConstants.length = _vertexConstantsMax;
 			_fragmentConstants.length = _fragmentConstantsMax;

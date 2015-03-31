@@ -85,7 +85,7 @@ package asgl.renderers {
 			//==================
 			_constantBatchVertexBuffers = {};
 			
-			_constantBatchMaxQuad = (_device._profile._vertexConstantsMax - 8) / 8;
+			_constantBatchMaxQuad = (_device._profile._agalConfiguration.vc._maxNum - 8) / 8;
 			var numVertices:int = _constantBatchMaxQuad * 4;
 			
 			_constantBatchConstVector = new Vector.<Number>(numVertices * 8);

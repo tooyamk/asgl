@@ -52,27 +52,27 @@ package asgl.shaders.asm.agal.compiler {
 				_sampleValueMap = {};
 				_sampleIndexMap = {};
 				
-				_registerMap[RegisterType.VERTEX_ATTRIBUTE] = AGALRegisterType.VA_ID;
-				_registerMap[RegisterType.VERTEX_CONSTANT] = AGALRegisterType.VC_ID;
-				_registerMap[RegisterType.FRAGMENT_CONSTANT] = AGALRegisterType.FC_ID;
-				_registerMap[RegisterType.VERTEX_TEMPORARY] = AGALRegisterType.VT_ID;
-				_registerMap[RegisterType.FRAGMENT_TEMPORARY] = AGALRegisterType.FT_ID;
+				_registerMap[RegisterType.VERTEX_ATTRIBUTE] = AGALRegisterType.VA;
+				_registerMap[RegisterType.VERTEX_CONSTANT] = AGALRegisterType.VC;
+				_registerMap[RegisterType.FRAGMENT_CONSTANT] = AGALRegisterType.FC;
+				_registerMap[RegisterType.VERTEX_TEMPORARY] = AGALRegisterType.VT;
+				_registerMap[RegisterType.FRAGMENT_TEMPORARY] = AGALRegisterType.FT;
 				
-				_registerMap[RegisterType.VERTEX_OUTPUT_V1] = AGALRegisterType.VO_ID;
-				_registerMap[RegisterType.VERTEX_OUTPUT_V2] = AGALRegisterType.VO_ID;
+				_registerMap[RegisterType.VERTEX_OUTPUT_V1] = AGALRegisterType.VO;
+				_registerMap[RegisterType.VERTEX_OUTPUT_V2] = AGALRegisterType.VO;
 				
-				_registerMap[RegisterType.FRAGMENT_OUTPUT_V1] = AGALRegisterType.FO_ID;
-				_registerMap[RegisterType.FRAGMENT_OUTPUT_V2] = AGALRegisterType.FO_ID;
+				_registerMap[RegisterType.FRAGMENT_OUTPUT_V1] = AGALRegisterType.FO;
+				_registerMap[RegisterType.FRAGMENT_OUTPUT_V2] = AGALRegisterType.FO;
 				
-				_registerMap[RegisterType.FRAGMENT_DEPTH_V1] = AGALRegisterType.FD_ID;
-				_registerMap[RegisterType.FRAGMENT_DEPTH_V2] = AGALRegisterType.FD_ID;
+				_registerMap[RegisterType.FRAGMENT_DEPTH_V1] = AGALRegisterType.FD;
+				_registerMap[RegisterType.FRAGMENT_DEPTH_V2] = AGALRegisterType.FD;
 				
-				_registerMap[RegisterType.VARYING_V1] = AGALRegisterType.V_ID;
-				_registerMap[RegisterType.VARYING_V2] = AGALRegisterType.V_ID;
-				_registerMap[RegisterType.VARYING_V3] = AGALRegisterType.V_ID;
-				_registerMap[RegisterType.VARYING_V4] = AGALRegisterType.V_ID;
+				_registerMap[RegisterType.VARYING_V1] = AGALRegisterType.V;
+				_registerMap[RegisterType.VARYING_V2] = AGALRegisterType.V;
+				_registerMap[RegisterType.VARYING_V3] = AGALRegisterType.V;
+				_registerMap[RegisterType.VARYING_V4] = AGALRegisterType.V;
 				
-				_registerMap[RegisterType.TEXTURE_SAMPLER] = AGALRegisterType.FS_ID;
+				_registerMap[RegisterType.TEXTURE_SAMPLER] = AGALRegisterType.FS;
 				
 				_sampleIndexMap[Context3DTextureFilter.NEAREST] = 0;
 				_sampleValueMap[Context3DTextureFilter.NEAREST] = AGALSamplerFlag.FILTER[Context3DTextureFilter.NEAREST];
@@ -253,7 +253,7 @@ package asgl.shaders.asm.agal.compiler {
 			var arr:Array = src.match(_registerReg);
 			var regStr:String = arr[0];
 			var typeStr:String = regStr.replace(_typeReg, '');
-			var reg:AGALRegister = config.getRegsiterFromID(_registerMap[typeStr]);
+			var reg:AGALRegister = config.getRegsiter(_registerMap[typeStr]);
 			if (reg == null) {
 				regData.success = false;
 			} else {
@@ -302,7 +302,7 @@ package asgl.shaders.asm.agal.compiler {
 					regData.indirect = true;
 					
 					var indirectRegStr:String = arr[1];
-					reg = config.getRegsiterFromID(_registerMap[indirectRegStr.replace(_typeReg, '')]);
+					reg = config.getRegsiter(_registerMap[indirectRegStr.replace(_typeReg, '')]);
 					if (reg == null) {
 						regData.success = false;
 					} else {
