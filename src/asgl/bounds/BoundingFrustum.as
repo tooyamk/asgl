@@ -35,9 +35,13 @@ package asgl.bounds {
 			if (matrix != null) this.setMatrix(matrix);
 		}
 		/**
-		 * @param matrix if test vertex in local space, matrix = world to proj Matrix.</br>
-		 * 				 if test vertex in world space, matrix = view to proj Matrix.</br>
-		 * 				 if test vertex in view space, matrix = projMatrix.
+		 * @param matrix 
+		 * 
+		 * <pre>
+		 * if test vertex in local space, matrix = world to proj Matrix.</br>
+		 * if test vertex in world space, matrix = view to proj Matrix.</br>
+		 * if test vertex in view space, matrix = projMatrix.
+		 * </pre>
 		 */
 		public function setMatrix(matrix:Matrix4x4):void {
 			var x:Number = matrix.m03 - matrix.m00;
@@ -175,7 +179,7 @@ package asgl.bounds {
 			return true;
 		}
 		public function isSphereInFrustum(x:Number, y:Number, z:Number, radius:Number):int {
-			var state:int = 0;
+			var state:int = ContainmentType.DISJOINT;
 			var side:int = 0;
 			
 			var d:Number = rightX * x + rightY * y + rightZ * z + rightW;
@@ -203,9 +207,9 @@ package asgl.bounds {
 			
 			if (side > 0) {
 				if (side == 6) {
-					state = 2;
+					state = ContainmentType.CONTAINS;
 				} else {
-					state = 1;
+					state = ContainmentType.INTERSECTS;
 				}
 			}
 			

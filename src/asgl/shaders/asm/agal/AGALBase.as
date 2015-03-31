@@ -7,7 +7,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * absolute.</br>
 		 * destination = abs(source1)</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function abs(dest:String, src:String):String {
 			return OpcodeType.ABSOLUTE + ' ' + dest + ', ' + src + NEWLINE;
@@ -15,7 +14,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * add.</br>
 		 * destination = source1 + source2</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function add(dest:String, src1:String, src2:String):String {
 			return OpcodeType.ADD + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -23,7 +21,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * cross product.</br>
 		 * produces only a 3 component result, destination must be masked to .xyz or less</br>
-		 * equal to 3 simple opcode
 		 * 
 		 * <pre>
 		 * destination.x = source1.y ~~ source2.z - source1.z ~~ source2.y
@@ -37,7 +34,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * cosine.</br>
 		 * destination = cos(source1)</br>
-		 * equal to 40 simple opcode
 		 */
 		public static function cos(dest:String, src:String):String {
 			return OpcodeType.COSINE + ' ' + dest + ', ' + src + NEWLINE;
@@ -51,7 +47,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * divide.</br>
 		 * destination = source1 / source2</br>
-		 * equal to 5 simple opcode
 		 */
 		public static function div(dest:String, src1:String, src2:String):String {
 			return OpcodeType.DIVIDE + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -59,7 +54,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * dot product.</br>
 		 * destination = source1.x ~~ source2.x + source1.y ~~ source2.y + source1.z ~~ source2.z</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function dot3(dest:String, src1:String, src2:String):String {
 			return OpcodeType.DOT_PRODUCT_3 + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -67,7 +61,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * dot product.</br>
 		 * destination = source1.x ~~ source2.x + source1.y ~~ source2.y + source1.z ~~ source2.z + source1.w ~~ source2.w</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function dot4(dest:String, src1:String, src2:String):String {
 			return OpcodeType.DOT_PRODUCT_4 + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -81,7 +74,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * exponential.</br>
 		 * destination = 2^source1</br>
-		 * equal to 4 simple opcode
 		 */
 		public static function exp2(dest:String, src:String):String {
 			return OpcodeType.EXPONENTIAL_2 + ' ' + dest + ', ' + src + NEWLINE;
@@ -89,7 +81,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * fractional.</br>
 		 * destination = source1 - (float)floor(source1)</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function frac(dest:String, src:String):String {
 			return OpcodeType.FRACTIONAL + ' ' + dest + ', ' + src + NEWLINE;
@@ -109,7 +100,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * set-if-equal.</br>
 		 * destination = source1 == source2 ? 1 : 0</br>
-		 * equal to 5 simple opcode
 		 */
 		public static function isEqual(dest:String, src1:String, src2:String):String {
 			return OpcodeType.IS_EQUAL + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -117,7 +107,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * set-if-greater-equal.</br>
 		 * destination = source1 >= source2 ? 1 : 0</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function isGreaterEqual(dest:String, src1:String, src2:String):String {
 			return OpcodeType.IS_GREATER_EQUAL + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -125,7 +114,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * set-if-less-than.</br>
 		 * destination = source1 < source2 ? 1 : 0</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function isLessThan(dest:String, src1:String, src2:String):String {
 			return OpcodeType.IS_LESS_THAN + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -133,7 +121,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * set-if-not-equal.</br>
 		 * destination = source1 != source2 ? 1 : 0</br>
-		 * equal to 5 simple opcode
 		 */
 		public static function isNotEqual(dest:String, src1:String, src2:String):String {
 			return OpcodeType.IS_NOT_EQUAL + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -149,7 +136,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * logarithm.</br>
 		 * destination = log_2(source1)</br>
-		 * equal to 4 simple opcode
 		 */
 		public static function log2(dest:String, src:String):String {
 			return OpcodeType.LOGARITHM_2 + ' ' + dest + ', ' + src + NEWLINE;
@@ -157,7 +143,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * multiply matrix 3x3.</br>
 		 * produces only a 3 component result, destination must be masked to .xyz or less</br>
-		 * equal to 4 simple opcode
 		 * 
 		 * <pre>
 		 * destination.x = (source1.x ~~ source2[0].x) + (source1.y ~~ source2[0].y) + (source1.z ~~ source2[0].z)
@@ -171,7 +156,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * multiply matrix 3x4.</br>
 		 * produces only a 3 component result, destination must be masked to .xyz or less</br>
-		 * equal to 4 simple opcode
 		 * 
 		 * <pre>
 		 * destination.x = (source1.x ~~ source2[0].x) + (source1.y ~~ source2[0].y) + (source1.z ~~ source2[0].z) + (source1.w ~~ source2[0].w)
@@ -184,7 +168,6 @@ package asgl.shaders.asm.agal {
 		}
 		/**
 		 * multiply matrix 4x4.</br>
-		 * equal to 5 simple opcode
 		 * 
 		 * <pre>
 		 * destination.x = (source1.x ~~ source2[0].x) + (source1.y ~~ source2[0].y) + (source1.z ~~ source2[0].z) + (source1.w ~~ source2[0].w)
@@ -199,7 +182,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * maximum.</br>
 		 * destination = maximum(source1,source2)</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function max(dest:String, src1:String, src2:String):String {
 			return OpcodeType.MAXIMUM + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -207,7 +189,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * minimum.</br>
 		 * destination = minimum(source1,source2)</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function min(dest:String, src1:String, src2:String):String {
 			return OpcodeType.MINIMUM + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -215,7 +196,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * move.</br>
 		 * move data from source1 to destination</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function move(dest:String, src:String):String {
 			return OpcodeType.MOVE + ' ' + dest + ', ' + src + NEWLINE;
@@ -223,7 +203,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * multiply.</br>
 		 * destination = source1 * source2</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function mul(dest:String, src1:String, src2:String):String {
 			return OpcodeType.MULTIPLY + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -231,7 +210,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * negate.</br>
 		 * destination = -source1</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function negate(dest:String, src:String):String {
 			return OpcodeType.NEGATE + ' ' + dest + ', ' + src + NEWLINE;
@@ -240,7 +218,6 @@ package asgl.shaders.asm.agal {
 		 * normalize.</br>
 		 * destination = normalize(source1)</br>
 		 * produces only a 3 component result, destination must be masked to .xyz or less</br>
-		 * equal to 4 simple opcode
 		 */
 		public static function normalize(dest:String, src:String):String {
 			return OpcodeType.NORMALIZE + ' ' + dest + ', ' + src + NEWLINE;
@@ -248,7 +225,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * power.</br>
 		 * destination = pow(source1, source2)</br>
-		 * equal to 16 simple opcode
 		 */
 		public static function pow(dest:String, src1:String, src2:String):String {
 			return OpcodeType.POWER + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
@@ -256,7 +232,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * reciprocal.</br>
 		 * destination = 1/source1</br>
-		 * equal to 4 simple opcode
 		 */
 		public static function reciprocal(dest:String, src:String):String {
 			return OpcodeType.RECIPROCAL + ' ' + dest + ', ' + src + NEWLINE;
@@ -264,7 +239,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * reciprocal root.</br>
 		 * destination = 1/sqrt(source1)</br>
-		 * equal to 4 simple opcode
 		 */
 		public static function rsqrt(dest:String, src:String):String {
 			return OpcodeType.RECIPROCAL_ROOT + ' ' + dest + ', ' + src + NEWLINE;
@@ -272,7 +246,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * saturate.</br>
 		 * destination = maximum(minimum(source1,1),0)</br>
-		 * equal to 3 simple opcode
 		 */
 		public static function saturate(dest:String, src:String):String {
 			return OpcodeType.SATURATE + ' ' + dest + ', ' + src + NEWLINE;
@@ -280,7 +253,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * sine.</br>
 		 * destination = sin(source1)</br>
-		 * equal to 40 simple opcode
 		 */
 		public static function sin(dest:String, src:String):String {
 			return OpcodeType.SINE + ' ' + dest + ', ' + src + NEWLINE;
@@ -288,7 +260,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * square root.</br>
 		 * destination = sqrt(source1)</br>
-		 * equal to 8 simple opcode
 		 */
 		public static function sqrt(dest:String, src:String):String {
 			return OpcodeType.SQUARE_ROOT + ' ' + dest + ', ' + src + NEWLINE;
@@ -296,7 +267,6 @@ package asgl.shaders.asm.agal {
 		/**
 		 * subtract.</br>
 		 * destination = source1 - source2</br>
-		 * equal to 1 simple opcode
 		 */
 		public static function sub(dest:String, src1:String, src2:String):String {
 			return OpcodeType.SUBTRACT + ' ' + dest + ', ' + src1 + ', ' + src2 + NEWLINE;
