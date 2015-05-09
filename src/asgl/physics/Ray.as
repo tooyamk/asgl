@@ -15,6 +15,11 @@ package asgl.physics {
 		public var origin:Float3;
 		public var direction:Float3;
 		
+		/**
+		 * handler(obj:Object3D, info:RaycastHit):Boolean
+		 */
+		public var hitHandler:Function;
+		
 		public function Ray(origin:Float3=null, direction:Float3=null) {
 			this.origin = origin;
 			this.direction = direction;
@@ -100,7 +105,10 @@ package asgl.physics {
 					if (t != -1) {
 						hitInfo.t = t;
 						hitInfo.object = obj;
-						find = true;
+						
+						if (hitHandler == null || hitHandler(obj, hitInfo)) {
+							find = true;
+						}
 					}
 				}
 			}
@@ -117,8 +125,11 @@ package asgl.physics {
 					var t:Number = obj._boundingVolume.intersectRay(_ray);
 					if (t != -1) {
 						if (hitInfo.t == -1 || hitInfo.t > t) {
-							hitInfo.t = t;
-							hitInfo.object = obj;
+							
+							if (hitHandler == null || hitHandler(obj, hitInfo)) {
+								hitInfo.t = t;
+								hitInfo.object = obj;
+							}
 						}
 					}
 				}
