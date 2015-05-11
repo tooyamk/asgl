@@ -4,5 +4,4 @@
 .flexLibProperties
 /.settings
 /bin-debug
-*.bin
 *.xml
