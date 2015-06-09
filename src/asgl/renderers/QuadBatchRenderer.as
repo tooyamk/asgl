@@ -914,7 +914,7 @@ package asgl.renderers {
 			
 			_dilatationVertexBatch(_device, _vertexBatchQuadNum);
 			
-			if (_vertexBatchMaterial._shader == null) _vertexBatchMaterial.shader = _device.createShader();
+			_vertexBatchMaterial.shader = _device.createShader();
 			_vertexBatchMaterial.shader.upload(VertexBatchShaderAsset.asset);
 			_vertexBatchMaterial.updateShaderProgram();
 			
@@ -924,17 +924,15 @@ package asgl.renderers {
 				vector[i] = i * 2;
 			}
 			
-			if (_constantBatchVertexBuffer == null) {
-				_constantBatchVertexBuffer = _device._vertexBufferManager.createVertexBufferData(numVertices, 1);
-				_constantBatchVertexBuffer.format = Context3DVertexBufferFormat.FLOAT_1;
-				_constantBatchVertexBuffers[BATCH_DATA_BUFFER0] = _constantBatchVertexBuffer;
-			}
+			_constantBatchVertexBuffer = _device._vertexBufferManager.createVertexBufferData(numVertices, 1);
+			_constantBatchVertexBuffer.format = Context3DVertexBufferFormat.FLOAT_1;
+			_constantBatchVertexBuffers[BATCH_DATA_BUFFER0] = _constantBatchVertexBuffer;
 			_constantBatchVertexBuffer.uploadFromVector(vector);
 			
-			if (_constantBatchIndexBuffer == null) _constantBatchIndexBuffer = _device._indexBufferManager.createIndexBufferData(_constantBatchMaxQuad * 6);
+			_constantBatchIndexBuffer = _device._indexBufferManager.createIndexBufferData(_constantBatchMaxQuad * 6);
 			_constantBatchIndexBuffer.uploadFromVector(_vertexBatchIndexVector);
 			
-			if (_constantBatchMaterial._shader == null) _constantBatchMaterial.shader = _device.createShader();
+			_constantBatchMaterial.shader = _device.createShader();
 			_constantBatchMaterial.shader.upload(ConstantBatchShaderAsset.asset);
 			_constantBatchMaterial.updateShaderProgram();
 			

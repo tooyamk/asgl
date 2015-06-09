@@ -807,7 +807,7 @@ package asgl.utils.spine {
 		private function _deviceRecoveryHandler(e:Event):void {
 			_dilatationVertexBatch(_device, _vertexBatchTriangleNum);
 			
-			if (_vertexBatchMaterial._shader == null) _vertexBatchMaterial.shader = _device.createShader();
+			_vertexBatchMaterial.shader = _device.createShader();
 			_vertexBatchMaterial.shader.upload(SpineBatchShaderAsset.asset);
 			_vertexBatchMaterial.updateShaderProgram();
 			
